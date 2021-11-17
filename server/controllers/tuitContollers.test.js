@@ -91,7 +91,7 @@ describe("Given the tuit controllers", () => {
         Tuit.findByIdAndDelete = jest.fn().mockResolvedValue(req.params);
         await deleteTuit(req, res);
 
-        expect(res.json).toHaveBeenCalledWith(req.params.id);
+        expect(res.json).toHaveBeenCalledWith(req.params);
         expect(res.status).toHaveBeenCalledWith(expectedStatus);
       });
     });

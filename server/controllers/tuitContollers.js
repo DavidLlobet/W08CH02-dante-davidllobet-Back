@@ -34,7 +34,7 @@ const deleteTuit = async (req, res, next) => {
       const error = new Error("Tuit not found.");
       return next(error);
     }
-    return res.status(200).json(id);
+    return res.status(200).json({ id });
   } catch {
     const error = new Error("Error deleting the tuit.");
     return next(error);
@@ -42,13 +42,12 @@ const deleteTuit = async (req, res, next) => {
 };
 
 const createTuit = async (req, res, next) => {
-  const { text } = req.body;
   try {
-    const tuit = await Tuit.create({ text });
-    return res.status(201).json(tuit);
+    const tuit = await Tuit.create(req.body);
+    res.status(201).json(tuit);
   } catch {
     const error = new Error("Error creating the tuit.");
-    return next(error);
+    next(error);
   }
 };
 
