@@ -15,6 +15,6 @@ const tuitSchema = new Schema({
   },
 });
 
-const Tuit = model("Tuit", tuitSchema);
+const Tuit = model("tuit", tuitSchema, "tuits");
 
 module.exports = Tuit;
