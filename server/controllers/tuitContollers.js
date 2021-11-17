@@ -25,4 +25,15 @@ const deleteTuit = async (req, res, next) => {
   }
 };
 
-module.exports = { getTuits, deleteTuit };
+const createTuit = async (req, res, next) => {
+  const { text } = req.body;
+  try {
+    const tuit = await Tuit.create({ text });
+    return res.status(201).json(tuit);
+  } catch {
+    const error = new Error("Error creating the tuit.");
+    return next(error);
+  }
+};
+
+module.exports = { getTuits, deleteTuit, createTuit };
