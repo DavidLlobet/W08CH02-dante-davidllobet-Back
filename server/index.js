@@ -4,6 +4,8 @@ const cors = require("cors");
 const debug = require("debug")("twitter:Server");
 const chalk = require("chalk");
 
+const tuitRoutes = require("./routes/tuitRoutes");
+
 const app = express();
 
 app.use(cors());
@@ -32,5 +34,7 @@ http://localhost:${port}`)
       debug(chalk.yellow("Server express disconnected."));
     });
   });
+
+app.use("/tuits", tuitRoutes);
 
 module.exports = { initializeServer, app };
