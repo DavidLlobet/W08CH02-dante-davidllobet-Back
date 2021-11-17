@@ -10,6 +10,22 @@ const getTuits = async (req, res, next) => {
   }
 };
 
+const getTuit = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const tuits = await Tuit.findById({ id });
+    if (!tuits) {
+      const error = new Error("Tuit not found.");
+      error.status = 404;
+      return next(error);
+    }
+    return res.status(200).json(tuits);
+  } catch {
+    const error = new Error("Error loading the tuits.");
+    return next(error);
+  }
+};
+
 const deleteTuit = async (req, res, next) => {
   const { id } = req.params;
   try {
@@ -36,4 +52,4 @@ const createTuit = async (req, res, next) => {
   }
 };
 
-module.exports = { getTuits, deleteTuit, createTuit };
+module.exports = { getTuits, deleteTuit, createTuit, getTuit };
