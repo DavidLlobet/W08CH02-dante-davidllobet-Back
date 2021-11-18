@@ -51,4 +51,22 @@ const createTuit = async (req, res, next) => {
   }
 };
 
-module.exports = { getTuits, deleteTuit, createTuit, getTuit };
+const likeTuit = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const tuit = await Tuit.findById(id);
+    if (!tuit) {
+      const error = new Error("Tuit not found.");
+      error.code = 404;
+      return next(error);
+    }
+    tuit.likes += 1;
+    await tuit.save();
+    return res.status(200).json(tuit);
+  } catch {
+    const error = new Error("Error putting like on the tweet.");
+    return next(error);
+  }
+};
+
+module.exports = { getTuits, deleteTuit, createTuit, getTuit, likeTuit };
