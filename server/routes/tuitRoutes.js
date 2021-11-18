@@ -11,11 +11,13 @@ const {
 const router = express.Router();
 
 router.get("/", getTuits);
+
 router.get("/:id", getTuit);
 
 router.patch("/like/:id", likeTuit);
 
+router.delete("/delete/:id", deleteTuit);
+
 router.post("/create", createTuit);
-router.post("/delete/:id", deleteTuit);
 
 module.exports = router;
