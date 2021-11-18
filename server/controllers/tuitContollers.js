@@ -13,7 +13,7 @@ const getTuits = async (req, res, next) => {
 const getTuit = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const tuits = await Tuit.findById({ id });
+    const tuits = await Tuit.findById(id);
     if (!tuits) {
       const error = new Error("Tuit not found.");
       error.status = 404;
